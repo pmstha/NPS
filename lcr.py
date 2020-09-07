@@ -108,7 +108,10 @@ def capacitiveReactance(C,f):
 
 
 def impedance(L,C,R,f):
-    imp=np.sqrt((inductiveReactance(f,L)-capacitiveReactance(f,C))**2+R**2)
+    if(C==0):
+        imp=np.sqrt((inductiveReactance(f,L))**2+R**2)
+    else:
+        imp=np.sqrt((inductiveReactance(f,L)-capacitiveReactance(f,C))**2+R**2)
     return imp
 
 
@@ -116,7 +119,10 @@ def impedance(L,C,R,f):
 
 
 def phase(L,C,R,f):
-    pi=np.arctan((inductiveReactance(f,L)-capacitiveReactance(f,C))/R)*180/np.pi
+    if(C==0):
+        pi=np.arctan(inductiveReactance(f,L)/R)*180/np.pi
+    else:
+        pi=np.arctan((inductiveReactance(f,L)-capacitiveReactance(f,C))/R)*180/np.pi
     return pi
 
 
